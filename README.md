@@ -49,8 +49,8 @@ made through the course of this lesson.
 ## React Production Build
 
 One of the great features that Create React App provides to developers is the
-ability to build different versions of React application for different
-environments environments.
+ability to build different versions of a React application for different
+environments.
 
 When working in the **development** environment, a typical workflow for adding new
 features to a React application is something like this:
@@ -71,7 +71,8 @@ our application for **production**, also thanks to webpack. The end goal of our
 application is to get it into the hands of our users via our website. For our
 app to run in production, we have a different set of needs:
 
-- **Build** the files needed to run our app in the browser as small as possible
+- **Build** the files needed to run our app in the browser, keeping them as
+  small as possible
 - **Serve** the application's files from a server hosted online, rather than a
   local webpack development server
 - Don't show any error messages/warnings that are meant for developers rather
@@ -89,7 +90,8 @@ app and **serving** it from the Rails app, do the following:
     along with any external JavaScript libraries your code depends on, and
     squishing it as small as possible.
 - Copy all of the files and folders from within the `client/build` directory,
-  and move them to the `public` directory.
+  and move them to the `public` directory. Make sure you move them to `public`,
+  not `client/public`.
   - The `public` directory is used by Rails to serve assets, so when we run the
     Rails server, it will be able to display the files from our production
     version of the React application. When a user visits
@@ -97,7 +99,7 @@ app and **serving** it from the Rails app, do the following:
     directory.
 - Run `rails s` and visit [http://localhost:3000](http://localhost:3000) in the
   browser. You should see the production version of the React application!
-  - Explore the React app in the React dev tools in the browser. What
+  - Explore the React app in the browser using the React dev tools. What
     differences do you see between this version of the app and what you're used
     to when running in development mode?
 
@@ -112,8 +114,8 @@ it: how can we deal with client-side routing?
 
 In our React application, we're using React Router to handle client-side
 routing. Client-side routing means that a user should be able to navigate to the
-React application; load all the HTML/CSS/JavaScript code just **once**; and then
-click through links in our site to navigate different pages without making
+React application, load all the HTML/CSS/JavaScript code just **once**, and then
+click through links in our site to navigate to different pages without making
 another request to the server for a new HTML document.
 
 We have two client-side routes defined:
@@ -133,7 +135,7 @@ We have two client-side routes defined:
 When we run the app using `npm start` and webpack is handling the React server,
 it can handle these client-side routing requests just fine! **However**, when
 we're running React within the Rails application, we also have routes defined
-for our Rails API; and Rails will be responsible for all the routing logic in
+for our Rails API, and Rails will be responsible for all the routing logic in
 our application. So let's think about what will happen from the point of view of
 **Rails** when a user makes a request to these routes.
 
@@ -241,8 +243,8 @@ app next. You should be able to visit the deployed site now and see the full
 project live on the internet!
 
 To explain the React build process further: we have defined a NodeJS build
-process for the React app in a `package.json` file in the **root** directory of
-this project. It looks like this:
+process for the React app in the `package.json` file in the **root** directory
+of this project. It looks like this:
 
 ```json
 {
@@ -252,8 +254,8 @@ this project. It looks like this:
     "node": ">= 14"
   },
   "scripts": {
-    "build": "npm install --prefix client && npm run build --prefix client",
     "clean": "rm -rf public",
+    "build": "npm install --prefix client && npm run build --prefix client",
     "deploy": "cp -a client/build/. public/",
     "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
   }
@@ -262,7 +264,9 @@ this project. It looks like this:
 
 In this file, the `heroku-postbuild` script is the one that will run in Heroku
 when we deploy the app. This is the script that automates the steps we outlined
-above for building the React app. This script runs a series of commands to:
+above for building the React app. If you take a closer look at exactly what that
+script does, you'll see that it's simply calling each of the other three scripts
+we've defined. These scripts run a series of commands to:
 
 - Clean up any old files in the public directory
 - Install dependencies and build the React app
@@ -271,8 +275,8 @@ above for building the React app. This script runs a series of commands to:
 A big part of the deployment process is automating features like this to make
 future deployments easier. We could have handled this process manually by
 running some additional commands on the Heroku server after deploying, but then
-other developers would need to remember to run those same steps any time changes
-are made to the React app.
+we (or other developers) would need to remember to run those same steps any time
+changes are made to the React app.
 
 ## Conclusion
 
