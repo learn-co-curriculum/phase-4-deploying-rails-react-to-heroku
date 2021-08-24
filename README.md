@@ -26,10 +26,10 @@ and **clone** the repository there:
 
 After downloading the code, set up the repository locally:
 
-```sh
-bundle install
-rails db:create db:migrate db:seed
-npm install --prefix client
+```console
+$ bundle install
+$ rails db:create db:migrate db:seed
+$ npm install --prefix client
 ```
 
 This application has a Rails API with session-based authentication; a React
@@ -38,8 +38,8 @@ database.
 
 You can run the app locally (assuming you have the Heroku CLI installed) with:
 
-```sh
-heroku local -f Procfile.dev
+```console
+$ heroku local -f Procfile.dev
 ```
 
 Spend some time familiarizing yourself with the code for the demo app before
@@ -214,8 +214,8 @@ process and talk through how this automation works.
 
 First, in the demo project directory, create a new app on Heroku:
 
-```sh
-heroku create
+```console
+$ heroku create
 ```
 
 Next, we'll need to tell Heroku that this project is not **just** a Rails
@@ -223,9 +223,9 @@ project; we'll need to run some **NodeJS** code as well in order to execute the
 build scripts for our React application. We can do this via Heroku
 [buildpacks][buildpacks]:
 
-```sh
-heroku buildpacks:add heroku/nodejs --index 1
-heroku buildpacks:add heroku/ruby --index 2
+```console
+$ heroku buildpacks:add heroku/nodejs --index 1
+$ heroku buildpacks:add heroku/ruby --index 2
 ```
 
 This will tell Heroku to first run a build script for our React app using NodeJS
@@ -234,8 +234,8 @@ before running the build script for our Rails app (running `bundle install` and
 
 To deploy the app, just like before, run:
 
-```sh
-git push heroku main
+```console
+$ git push heroku main
 ```
 
 This will kick off the build process on Heroku for the React app, then the Rails
