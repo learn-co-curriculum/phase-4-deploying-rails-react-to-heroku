@@ -89,9 +89,10 @@ app and **serving** it from the Rails app, do the following:
     **bundling** and **minification** process: taking the source code you wrote,
     along with any external JavaScript libraries your code depends on, and
     squishing it as small as possible.
-- Copy all of the files and folders from within the `client/build` directory,
-  and move them to the `public` directory. Make sure you move them to `public`,
-  not `client/public`.
+- Move all of the files and folders that are inside the `client/build` directory
+  into to the `public` directory. The best way to do this is to run the
+  following command from the top level of the project directory: `mv
+  client/build/* public`.
   - The `public` directory is used by Rails to serve assets, so when we run the
     Rails server, it will be able to display the files from our production
     version of the React application. When a user visits
