@@ -89,9 +89,10 @@ app and **serving** it from the Rails app, do the following:
     **bundling** and **minification** process: taking the source code you wrote,
     along with any external JavaScript libraries your code depends on, and
     squishing it as small as possible.
-- Copy all of the files and folders from within the `client/build` directory,
-  and move them to the `public` directory. Make sure you move them to `public`,
-  not `client/public`.
+- Move all of the files and folders that are inside the `client/build` directory
+  into to the `public` directory. The best way to do this is to run the
+  following command from the top level of the project directory: `mv
+  client/build/* public`.
   - The `public` directory is used by Rails to serve assets, so when we run the
     Rails server, it will be able to display the files from our production
     version of the React application. When a user visits
@@ -294,6 +295,14 @@ provide a template project to use so you don't have to worry about configuring
 the tricky parts of the deployment process yourself. However, it's helpful to
 have an understanding of this configuration should you wish to customize it
 or troubleshoot issues related to deployments in the future.
+
+## Check For Understanding
+
+Before you move on, make sure you can answer the following questions:
+
+1. Why does deploying the production version of our Rails/React app lead to
+   routing problems? How can we modify our routes to fix the issue?
+2. How does adding a NodeJS build process to the `package.json` file help us?
 
 ## Resources
 
