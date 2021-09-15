@@ -32,8 +32,8 @@ $ rails db:create db:migrate db:seed
 $ npm install --prefix client
 ```
 
-This application has a Rails API with session-based authentication; a React
-frontend using React Router for client-side routing; and Postgresql for the
+This application has a Rails API with session-based authentication, a React
+frontend using React Router for client-side routing, and Postgresql for the
 database.
 
 You can run the app locally (assuming you have the Heroku CLI installed) with:
@@ -52,8 +52,8 @@ One of the great features that Create React App provides to developers is the
 ability to build different versions of a React application for different
 environments.
 
-When working in the **development** environment, a typical workflow for adding new
-features to a React application is something like this:
+When working in the **development** environment, a typical workflow for adding
+new features to a React application is something like this:
 
 - Run `npm start` to run a development server
 - Make changes to the app by editing the files
@@ -206,9 +206,11 @@ our Rails application? Well, we had to:
 - Move the code from the `client/build` folder to the `public` folder
 - Run `rails s`
 
-Ideally, we'd like to be able to **automate** those steps when we deploy this
-app to Heroku, so we can just push up new versions of our code to Heroku and
-deploy them like we were able to do in the previous lesson.
+We would also need to repeat these steps any time we made any changes to the
+React code, i.e., to anything in the `client` folder. Ideally, we'd like to be
+able to **automate** those steps when we deploy this app to Heroku, so we can
+just push up new versions of our code to Heroku and deploy them like we were
+able to do in the previous lesson.
 
 Thankfully, Heroku lets us do just that! Let's get started with the deploying
 process and talk through how this automation works.
