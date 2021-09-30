@@ -71,38 +71,62 @@ our application for **production**, also thanks to webpack. The end goal of our
 application is to get it into the hands of our users via our website. For our
 app to run in production, we have a different set of needs:
 
-- **Build** the files needed to run our app in the browser, keeping them as
-  small as possible
+- **Build** the static HTML, JavaScript and CSS files needed to run our app in
+  the browser, keeping them as small as possible
 - **Serve** the application's files from a server hosted online, rather than a
   local webpack development server
 - Don't show any error messages/warnings that are meant for developers rather
   than our website's users
 
-To demonstrate this process of **building** the production version of our React
-app and **serving** it from the Rails app, do the following:
+### Building a Static React App
 
-- Run `npm run build --prefix client`.
-  - This will generate a bundled and minified version of our React app in the
-    `client/build` folder. Check out the files in that directory, and in
-    particular the JavaScript files. You'll notice they have very little
-    resemblance to the files in your `src` directory! This is because of that
-    **bundling** and **minification** process: taking the source code you wrote,
-    along with any external JavaScript libraries your code depends on, and
-    squishing it as small as possible.
-- Move all of the files and folders that are inside the `client/build` directory
-  into to the `public` directory. The best way to do this is to run the
-  following command from the top level of the project directory: `mv
-  client/build/* public`.
-  - The `public` directory is used by Rails to serve assets, so when we run the
-    Rails server, it will be able to display the files from our production
-    version of the React application. When a user visits
-    `http://localhost:3000`, Rails will return the `index.html` file from this
-    directory.
-- Run `rails s` and visit [http://localhost:3000](http://localhost:3000) in the
-  browser. You should see the production version of the React application!
-  - Explore the React app in the browser using the React dev tools. What
-    differences do you see between this version of the app and what you're used
-    to when running in development mode?
+When developing the frontend of a site using Create React App, our ultimate goal
+is to create a **static site** consisting of pre-built HTML, JavaScript, and CSS
+files, which can be served by Rails when a user makes a request to the server to
+view our frontend. To demonstrate this process of **building** the production
+version of our React app and **serving** it from the Rails app, follow these
+steps.
+
+**1.** Build the production version of our React app:
+
+```console
+$ npm run build --prefix client
+```
+
+This command will generate a bundled and minified version of our React app in
+the `client/build` folder.
+
+Check out the files in that directory, and in particular the JavaScript files.
+You'll notice they have very little resemblance to the files in your `src`
+directory! This is because of that **bundling** and **minification** process:
+taking the source code you wrote, along with any external JavaScript libraries
+your code depends on, and squishing it as small as possible.
+
+**2.** Move our static frontend files to the `/public directory`:
+
+```console
+$ mv client/build/* public
+```
+
+This command will move all of the files and folders that are inside the
+`client/build` directory into to the `public` directory. The `public` directory
+is used by Rails to serve **static** assets, so when we run the Rails server, it
+will be able to display the files from our production version of the React
+application. When a user visits `http://localhost:3000`, Rails will return the
+`index.html` file from this directory.
+
+**3.** Run the Rails server:
+
+```console
+$ rails s
+```
+
+Visit [http://localhost:3000](http://localhost:3000) in the browser. You should
+see the production version of the React application!
+
+Explore the React app in the browser using the React dev tools. What differences
+do you see between this version of the app and what you're used to when running
+in development mode?
 
 Now you've seen how to build a production version of the React application
 locally, and some of the differences between this version and the development
@@ -111,7 +135,7 @@ version you're more familiar with.
 There is one other issue with our React application to dive into before we deploy
 it: how can we deal with client-side routing?
 
-## Configuring Rails for Client-Side Routing
+### Configuring Rails for Client-Side Routing
 
 In our React application, we're using React Router to handle client-side
 routing. Client-side routing means that a user should be able to navigate to the
