@@ -210,6 +210,18 @@ end
 
 This action has just one job: to render the HTML file for our React application!
 
+> **Note**: It's important that this `FallbackController` inherits from
+> `ActionController::Base` instead of `ApplicationController`, which is what
+> your API controllers inherit from. Why? The `ApplicationController` class in a
+> Rails API inherits from the
+> [`ActionController::API` class][actioncontroller api], which doesn't include
+> the methods for rendering HTML. For our other controllers, this isn't a
+> problem, since they only need to render JSON responses. But for the
+> `FallbackController`, we need the ability to render a HTML file for our React
+> application.
+
+[actioncontroller api]: https://api.rubyonrails.org/classes/ActionController/API.html
+
 Experiment with the code above. Run `rails s` to run the application. Try
 commenting out the last line of the `routes.rb` file, and visit
 [http://localhost:3000/new](http://localhost:3000/new). You should see a 404
