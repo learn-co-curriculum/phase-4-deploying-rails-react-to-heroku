@@ -217,7 +217,7 @@ This action has just one job: to render the HTML file for our React application!
 > [`ActionController::API` class][actioncontroller api], which doesn't include
 > the methods for rendering HTML. For our other controllers, this isn't a
 > problem, since they only need to render JSON responses. But for the
-> `FallbackController`, we need the ability to render a HTML file for our React
+> `FallbackController`, we need the ability to render an HTML file for our React
 > application.
 
 [actioncontroller api]: https://api.rubyonrails.org/classes/ActionController/API.html
