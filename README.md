@@ -201,14 +201,20 @@ sending them to a special `FallbackController` with an `index` action:
 
 ```rb
 # app/controllers/fallback_controller.rb
-class FallbackController < ActionController::Base
+class FallbackController < ApplicationController
+  include ActionController::MimeResponds
+
   def index
-    render file: 'public/index.html'
+    respond_to do |format|
+      format.html { render body: Rails.root.join('public/index.html').read }
+    end
   end
 end
 ```
 
-This action has just one job: to render the HTML file for our React application!
+This action has just one job: to render the contents of the `index.html` file 
+from our built React application! We need the `respond_to` block because our
+Rails application in API only mode won't render HTML responses by default.
 
 Experiment with the code above. Run `rails s` to run the application. Try
 commenting out the last line of the `routes.rb` file, and visit
