@@ -290,7 +290,7 @@ of this project. It looks like this:
   "name": "phase-4-deploying-app-demo",
   "description": "Build scripts for Heroku",
   "engines": {
-    "node": ">= 14"
+    "node": "16.x"
   },
   "scripts": {
     "clean": "rm -rf public",
